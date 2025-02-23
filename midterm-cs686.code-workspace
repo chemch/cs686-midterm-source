@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../koa-vue-notes-web"
+		},
+		{
+			"path": "../koa-vue-notes-api"
+		},
+		{
+			"path": "../crud-react-node-mySQL-go-confirm"
+		}
+	],
+	"settings": {}
+}

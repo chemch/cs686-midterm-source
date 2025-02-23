@@ -1,0 +1,58 @@
+
+services:
+
+
+  db:
+    image: mysql/mysql-server:5.7 
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: test
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./db_creation/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: [ "CMD", "mysql", "-u", "root", "-p", "password" ]
+      interval: 10s
+      timeout: 8s
+      retries: 5
+
+
+
+
+
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - "8800:8800"
+    environment:
+      DB_HOST: db
+      DB_USER: user
+      DB_PASSWORD: password
+      DB_NAME: test
+    depends_on:
+      - db
+
+
+
+
+
+  frontend:
+    environment:
+      - PORT=5173
+    build:
+      context: ./frontend
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+
+
+
+
+volumes:
+  db-data:
+
