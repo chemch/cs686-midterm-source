@@ -1,58 +1,62 @@
 
 services:
 
-
-  db:
-    image: mysql/mysql-server:5.7 
+  web-frontend:
     environment:
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: test
-      MYSQL_USER: user
-      MYSQL_PASSWORD: password
+      PORT: 6001
+      VITE_API_HOST: localhost
+      VITE_API_PORT: 4001
+    build:
+      context: ./web-ui
+    ports:
+      - "6001:6666"
+    depends_on:
+      - api-backend
+    networks:
+      - app-net
+
+  api-backend:
+    build:
+      context: ./server
+    ports:
+      - "4001:4444"
+    environment:
+      HOST_PORT: 4001
+      DB_HOST: mysql-db
+      DB_DATABASE: ${MYSQL_TEST_DATABASE}
+      DB_USER: ${MYSQL_TEST_USER}
+      DB_PASSWORD: ${MYSQL_TEST_USER_PASSWORD}
+      DB_WAITFORCONNECTIONS: ${API_DB_WAITFORCONNECTIONS}
+      DB_CONNECTIONLIMIT: ${API_DB_CONNECTIONLIMIT}
+      DB_QUEUELIMIT: ${API_DB_QUEUELIMIT}
+      DB_TABLE_NAME: ${API_DB_TABLE_NAME}
+    depends_on:
+      - mysql-db
+    entrypoint: ["./wait-for-it.sh", "mysql-db:3306", "--", "npm", "start"]
+    networks:
+      - app-net
+
+  mysql-db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_TEST_DATABASE}
+      MYSQL_USER: ${MYSQL_TEST_USER}
+      MYSQL_PASSWORD: ${MYSQL_TEST_USER_PASSWORD}
     ports:
       - "3306:3306"
-    volumes:
-      - ./db_creation/init.sql:/docker-entrypoint-initdb.d/init.sql
     healthcheck:
-      test: [ "CMD", "mysql", "-u", "root", "-p", "password" ]
-      interval: 10s
-      timeout: 8s
-      retries: 5
-
-
-
-
-
-  backend:
-    build:
-      context: ./backend
-    ports:
-      - "8800:8800"
-    environment:
-      DB_HOST: db
-      DB_USER: user
-      DB_PASSWORD: password
-      DB_NAME: test
-    depends_on:
-      - db
-
-
-
-
-
-  frontend:
-    environment:
-      - PORT=5173
-    build:
-      context: ./frontend
-    ports:
-      - "5173:5173"
-    depends_on:
-      - backend
-
-
-
+      test: ["CMD-SHELL", "mysql -h mysql-db -u ${MYSQL_TEST_USER} -p${MYSQL_TEST_USER_PASSWORD} -e 'SELECT 1'"]
+      interval: 20s
+      timeout: 10s
+      retries: 10
+      start_period: 30s
+    networks:
+      - app-net
 
 volumes:
-  db-data:
+  app-data:
 
+networks:
+  app-net:
+    driver: bridge

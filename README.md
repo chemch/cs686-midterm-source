@@ -1,54 +1,36 @@
-# cs686-midterm-source
-Source Repo for Midterm
+<h1>MySQL CRUD - Nodejs, Reactjs</h1>
 
 
-There was an issue with this repo which was causing the failures. I had a duplicate Dockerfile somehow that wasn't showing locally. After deleting that and making the following fixes it worked:
-- Creating table with rows
-- Healthcheck on DB
-- Vite configuration to get it to point to the right port locally
-- Changing index to use the correct login information
-
-  I originally got this all working in a separate branch: https://github.com/test-chemch/crud-react-node-mySQL-chase but I copied it into this one so they're now the same. 
+https://github.com/mushfiqurniazzz/Mysql-CRUD-Operations-With-Nodejs-And-Reactjs/assets/148959859/c0adf4d1-336c-4ee1-b28b-c5528eb481d0
 
 
-# Lama Book Shop CRUD Web Application
+<p>This app allows users to save users with name and email with specific id for everyone, featuring functionalities like create, read, update, delete. It uses MySQL as the database to store users, Express.js for handling server-side logic, React.js for building the user interface, and Node.js for server-side runtime environment. The app provides a seamless experience for users to save users and time.</p>
+<h3>Running the Project Locally</h3>
+  <p>To run this project on your local machine, follow these steps:
 
-<h4><i>Enjoy your favorite books, movies, and animated characters!</i></h4>
+1. <b>Clone the Repository</b>: Clone this repository to your local machine:
 
+   git clone <repository_url>
 
+2. <b>Navigate to Project Directory</b>: Move into the project directory:
 
-![image](https://github.com/Norbert305/crud-react-node-mySQL-go/assets/83515541/175be89d-5555-4b38-b479-42e06aa04f8c)
+   cd <project_directory>
 
+3. <b>Install Dependencies</b>: Install the necessary dependencies using npm or yarn:
 
-# Technologies
-<p>React.js, Node.js, Express, MySQL</p>
+   npm install
 
-# Video Demo
+   or
 
-https://vimeo.com/866824528?share=copy
+   yarn
 
-# Backend 
-<p>cd backend</p>
-<p>npm install</p>
-<p>npm start</p>
+4. <b>Setup Environment Variables</b>: Create a `.env` file in the root of your project directory and add the variables given in `.env.sample`
 
-# Frontend 
-<p>cd frontend</p>
-<p>npm install</p>
-<p>npm run dev</p>
+5. <b>Start the Development Server</b>: Run the following command to start the development server:
 
-# Need a mySQL DataBase
-<p>I used XAMPP</p> 
-<p>DataBase named test</p>
-<p>Table named books</p>
-http://localhost/dashboard/
+   npm start
 
-# Table Values
-<p>id -> primary key - not null </p>
-<p>title -> not null</p>
-<p>description -> not null</p>
-<p>cover -> null</p>
-<p>price -> not null</p>
+6. <b>Access the App</b>: Open your web browser and navigate to `http://<>:3000` for frontend `http://<>:<PORT>` to access the app. You can now use the app locally on your machine, connected to your MySQL database using the variables specified in the `.env` file.
 
-
-![image](https://github.com/Norbert305/crud-react-node-mySQL-go/assets/83515541/4d825d2e-16a4-4a95-96b1-847e958d1a0f)
+7. <b>Note</b>: The project may not work if you do not install dependencies in both front end and backend. So you would have to apply step 2 and 3 twice, once in frontend and once in backend.
+</p>

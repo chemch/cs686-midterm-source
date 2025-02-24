@@ -4,13 +4,10 @@
 			"path": "."
 		},
 		{
-			"path": "../koa-vue-notes-web"
-		},
-		{
-			"path": "../koa-vue-notes-api"
-		},
-		{
 			"path": "../crud-react-node-mySQL-go-confirm"
+		},
+		{
+			"path": "../Mysql-CRUD-Operations-With-Nodejs-And-Reactjs"
 		}
 	],
 	"settings": {}
