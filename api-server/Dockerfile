@@ -22,4 +22,5 @@ ENV HOST=localhost
 COPY wait-for-it.sh /usr/src/app/wait-for-it.sh
 RUN chmod +x /usr/src/app/wait-for-it.sh
 
+# start app
 CMD ["npm", "run", "start"]

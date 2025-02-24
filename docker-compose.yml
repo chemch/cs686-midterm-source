@@ -17,7 +17,7 @@ services:
 
   api-backend:
     build:
-      context: ./server
+      context: ./api-server
     ports:
       - "4001:4444"
     environment:
