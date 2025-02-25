@@ -38,3 +38,4 @@ ehthumbs.db
 yarn-error.log
 .pnp/
 .pnp.js
+.github/workflows/nightly-build.yml
