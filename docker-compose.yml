@@ -6,6 +6,7 @@ services:
       PORT: 6001
       VITE_API_HOST: localhost
       VITE_API_PORT: 4001
+      CONTAINER_PORT: 6666
     build:
       context: ./web-ui
     ports:

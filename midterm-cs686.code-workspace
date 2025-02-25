@@ -8,6 +8,9 @@
 		},
 		{
 			"path": "../Mysql-CRUD-Operations-With-Nodejs-And-Reactjs"
+		},
+		{
+			"path": "../cs686-midterm-infra"
 		}
 	],
 	"settings": {}
