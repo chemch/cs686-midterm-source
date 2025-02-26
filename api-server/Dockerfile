@@ -1,26 +1,47 @@
-# base image
-FROM node:20
+# Base image for build stage
+FROM node:20 AS builder
 
-# set working directory
+# Set working directory
 WORKDIR /app
 
-# copy package.json and package-lock.json
+# Copy package.json and package-lock.json first (leverages caching)
 COPY package*.json ./
 
-# install dependencies
-RUN npm install
+# Install only production dependencies
+ENV NODE_ENV=production
+RUN npm install --only=production
 
-# copy app
+# Copy application code
 COPY . .
 
-# set and expose port
+# Copy wait-for-it.sh to the correct location
+COPY wait-for-it.sh /app/wait-for-it.sh
+RUN chmod +x /app/wait-for-it.sh
+
+# Use a smaller base image for final production image
+FROM node:20-slim
+
+# Set working directory
+WORKDIR /app
+
+# Copy only necessary files from the build stage
+COPY --from=builder /app /app
+
+# Install curl efficiently & remove unnecessary package lists
+RUN apt-get update && apt-get install -y --no-install-recommends curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install curl for health check
+RUN apt-get update && apt-get install -y curl
+
+# Set non-root user for security
+RUN useradd -m appuser && chown -R appuser /app
+USER appuser
+
+# Set environment variables
 ENV PORT=4444
 EXPOSE 4444
 ENV HOST=localhost
 
-# Copy the wait-for-it script
-COPY wait-for-it.sh /usr/src/app/wait-for-it.sh
-RUN chmod +x /usr/src/app/wait-for-it.sh
-
-# start app
+# Start application
 CMD ["npm", "run", "start"]
