@@ -17,7 +17,6 @@ COPY . .
 RUN npm run build
 
 # set and expose port
-ENV PORT=6001
 EXPOSE 6666
 
 # start app

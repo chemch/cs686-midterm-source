@@ -3,8 +3,8 @@ services:
 
   web-frontend:
     environment:
-      PORT: 6001
       CONTAINER_PORT: 6666
+      # REFERENCES TO THE API BACKEND
       VITE_API_HOST: localhost
       VITE_API_PORT: 4001
     build:
