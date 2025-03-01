@@ -5,7 +5,9 @@ import process from "process";
 export default defineConfig({
   plugins: [react()],
   server: {
-    host: '0.0.0.0',
     port: process.env.CONTAINER_PORT, 
+    host: '0.0.0.0',
+    strictPort: true,
+    allowedHosts: "all"
   }
 });
