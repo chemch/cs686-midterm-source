@@ -8,6 +8,10 @@ export default defineConfig({
     port: process.env.CONTAINER_PORT, 
     host: '0.0.0.0',
     strictPort: true,
-    allowedHosts: "all"
+    allowedHosts: [
+      'ec2-3-88-169-162.compute-1.amazonaws.com',
+      'localhost',
+      '0.0.0.0'
+    ]
   }
 });
