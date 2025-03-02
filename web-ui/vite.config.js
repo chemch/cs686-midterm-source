@@ -9,15 +9,9 @@ export default defineConfig({
     host: '0.0.0.0',
     strictPort: true,
     https: false,
-    // ...(process.env.VITE_LOCAL_BUILD === "false" && {
-    //   hmr: {
-    //     protocol: "wss",
-    //     host: process.env.VITE_API_HOST,
-    //     port: 443,
-    //   },
-    // }),
     allowedHosts: [
       process.env.VITE_API_HOST,
+      'cs686chemch.works',
       'localhost',
       '0.0.0.0'
     ]
