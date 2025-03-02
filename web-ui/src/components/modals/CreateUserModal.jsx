@@ -8,15 +8,14 @@ import axios from "axios";
 function CreateUserModal({ addUser }) {
 
   // validate environment variables are set
-  if (!import.meta.env.VITE_API_PORT || !import.meta.env.VITE_API_HOST) {
-    throw new Error("API_PORT or API_HOST is not set");
+  if (!import.meta.env.VITE_API_PORT || !import.meta.env.VITE_API_HOST || !import.meta.env.VITE_API_PROTOCOL) {
+    throw new Error("API_PORT or API_HOST or API_PROTOCOL is not set");
   }
 
   // set the API_HOST and API_PORT from the environment variables
   const api_port = import.meta.env.VITE_API_PORT;
-  // console.log(`API_PORT: ${api_port}`);
   const api_host = import.meta.env.VITE_API_HOST;
-  // console.log(`API_HOST ${api_host}`);
+  const api_protocol = import.meta.env.VITE_API_PROTOCOL;
 
   //using state variables for access of the input fields
   const [name, setName] = useState("");
@@ -46,7 +45,7 @@ function CreateUserModal({ addUser }) {
       console.log(`Creating User: Name=${name}, Email=${email} at ${timestamp}`);
 
       //post req to server
-      const res = await axios.post(`http://${api_host}:${api_port}/`, {
+      const res = await axios.post(`${api_protocol}://${api_host}:${api_port}/`, {
         name,
         email
       });
