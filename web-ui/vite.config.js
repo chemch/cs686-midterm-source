@@ -9,7 +9,7 @@ export default defineConfig({
     host: '0.0.0.0',
     strictPort: true,
     allowedHosts: [
-      'ec2-3-88-169-162.compute-1.amazonaws.com',
+      process.env.VITE_API_HOST,
       'localhost',
       '0.0.0.0'
     ]
