@@ -22,7 +22,7 @@ function Table() {
   
   // check if the local build is set
   var axios_destination = "";
-  if (local_build) {
+  if (local_build === "true") {
     axios_destination = `${api_protocol}://${api_host}:${api_port}/`
   }
   else {
