@@ -8,6 +8,14 @@ export default defineConfig({
     port: process.env.CONTAINER_PORT, 
     host: '0.0.0.0',
     strictPort: true,
+    https: process.env.VITE_API_PROTOCOL === 'https',
+    ...(process.env.VITE_LOCAL_BUILD === "false" && {
+      hmr: {
+        protocol: "wss",
+        host: process.env.VITE_API_HOST,
+        port: 443,
+      },
+    }),
     allowedHosts: [
       process.env.VITE_API_HOST,
       'localhost',

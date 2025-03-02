@@ -27,7 +27,7 @@ function CreateUserModal({ addUser }) {
     // exclude the port if running on remote server
     axios_destination = `${api_protocol}://${api_host}/api/`
   }
-  console.log(`Axios Dest: ${axios_destination} due to Local Build: ${local_build}`);
+  // console.log(`Axios Dest: ${axios_destination} due to Local Build: ${local_build}`);
 
   //using state variables for access of the input fields
   const [name, setName] = useState("");

@@ -29,7 +29,7 @@ function Table() {
     // exclude the port if running on remote server
     axios_destination = `${api_protocol}://${api_host}/api/`
   }
-  console.log(`Axios Dest: ${axios_destination} due to Local Build: ${local_build}`);
+  // console.log(`Axios Dest: ${axios_destination} due to Local Build: ${local_build}`);
 
   //using use state, use ref for state variables and ref to track if fetch has already been attempted
   const [users, setUsers] = useState([]);
