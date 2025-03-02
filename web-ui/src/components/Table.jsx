@@ -18,6 +18,18 @@ function Table() {
   const api_port = import.meta.env.VITE_API_PORT;
   const api_host = import.meta.env.VITE_API_HOST;
   const api_protocol = import.meta.env.VITE_API_PROTOCOL;
+  const local_build = import.meta.env.VITE_LOCAL_BUILD;
+  
+  // check if the local build is set
+  var axios_destination = "";
+  if (local_build) {
+    axios_destination = `${api_protocol}://${api_host}:${api_port}/`
+  }
+  else {
+    // exclude the port if running on remote server
+    axios_destination = `${api_protocol}://${api_host}/api/`
+  }
+  console.log(`Axios Dest: ${axios_destination} due to Local Build: ${local_build}`);
 
   //using use state, use ref for state variables and ref to track if fetch has already been attempted
   const [users, setUsers] = useState([]);
@@ -29,7 +41,7 @@ function Table() {
       try {
         console.log(`Fetching Users from Server at ${new Date().toLocaleString()}`);
         //get request to the server
-        const response = await axios.get(`${api_protocol}://${api_host}:${api_port}`);
+        const response = await axios.get(axios_destination);
         //setting the empty array as a json object of users got from the server
         setUsers(response.data);
 

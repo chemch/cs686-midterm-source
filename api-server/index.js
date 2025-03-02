@@ -40,6 +40,20 @@ let pool;
     // use the router
     app.use("/", router);
 
+    // Allow all origins
+    app.use(cors({
+        origin: '*',
+        methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+        allowedHeaders: ['Content-Type', 'Authorization']
+    }));
+
+    // Handle preflight requests for all routes
+    app.options('*', cors());
+
+    app.get('/api/test', (req, res) => {
+        res.json({ message: "CORS is now open to any origin!" });
+    });
+
     // start the server
     app.listen(containerPort, () => {
         console.log(`Container listening on: http://${host}:${containerPort}`);

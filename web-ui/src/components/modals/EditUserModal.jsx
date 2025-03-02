@@ -15,6 +15,18 @@ function EditUserModal() {
   const api_port = import.meta.env.VITE_API_PORT;
   const api_host = import.meta.env.VITE_API_HOST;
   const api_protocol = import.meta.env.VITE_API_PROTOCOL;
+  const local_build = import.meta.env.VITE_LOCAL_BUILD;
+  
+  // check if the local build is set
+  var axios_destination = "";
+  if (local_build) {
+    axios_destination = `${api_protocol}://${api_host}:${api_port}/`
+  }
+  else {
+    // exclude the port if running on remote server
+    axios_destination = `${api_protocol}://${api_host}/api/`
+  }
+  console.log(`Axios Dest: ${axios_destination} due to Local Build: ${local_build}`);
 
   //using state variables for access of the input fields
   const [id, setId] = useState("");
@@ -48,7 +60,7 @@ function EditUserModal() {
       console.log(`Editing User: ID=${id}, Name=${name}, Email=${email} at ${timestamp}`);
 
       //put req to server
-      const res = await axios.put(`${api_protocol}://${api_host}:${api_port}`, {
+      const res = await axios.put(axios_destination, {
         id,
         name,
         email
